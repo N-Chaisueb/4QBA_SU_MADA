@@ -1,0 +1,43 @@
+&run_setup
+	lattice = "fnamelte",
+	use_beamline = RING,
+	p_central_mev = venergy,
+	rootname = "fname"
+&end
+
+&twiss_output
+        filename = "%s.twi",
+        concat_order = 3,    !if 2, running time is faster
+        matched = 1,
+		statistics=1, 
+		radiation_integrals=1,
+	    compute_driving_terms = 1,
+        higher_order_chromaticity =1,
+        higher_order_chromaticity_points = 11,
+        higher_order_chromaticity_range = 1.000000000000000e-02,
+&end
+
+&run_control
+	n_passes = 1024
+&end
+
+&bunched_beam 
+    n_particles_per_bunch = 1 
+&end
+
+&frequency_map
+    output = %s.fma, 
+    xmin = -0.04,  
+    xmax = 0.04,  
+    ymin = 1e-6,  
+    ymax = 1e-6,  
+    delta_min = -0.06,  
+    delta_max = 0.06,  
+    nx = 11,    !101 
+    ny = 1,    !301
+    ndelta = 11,  
+    verbosity = 0,  
+    include_changes = 1,  
+    quadratic_spacing = 0,  
+    full_grid_output = 0,  
+&end
